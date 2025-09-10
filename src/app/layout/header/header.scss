@@ -1,0 +1,100 @@
+// Path: src/app/layout/header/header.scss
+
+.app-header {
+  height: 70px;
+  padding: 0 2rem;
+  background-color: var(--sepa-bg-primary);
+  border-bottom: 1px solid var(--sepa-border-color);
+  box-shadow: var(--sepa-shadow-sm);
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--sepa-primary);
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  color: var(--sepa-primary);
+  margin-right: 0.5rem;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--sepa-text-primary);
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.navigation-items {
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  a {
+    font-weight: 500;
+    color: var(--sepa-text-secondary);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--sepa-primary);
+    }
+
+    &.active-link {
+      color: var(--sepa-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+.cart-button {
+  margin: 0 0.5rem;
+}
+
+.login-button {
+  margin: 0 1rem;
+  border-color: var(--sepa-primary);
+  color: var(--sepa-primary);
+  font-weight: 500;
+
+  mat-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.register-button {
+  font-weight: 500;
+}
+
+// --- NEW PROFILE AVATAR STYLES ---
+.profile-avatar-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 1rem;
+  padding: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures the image fills the circle without stretching
+  }
+}
+
+// Ensure icons in the menu are spaced correctly
+::ng-deep .mat-mdc-menu-item .mat-icon {
+  margin-right: 16px;
+}
+

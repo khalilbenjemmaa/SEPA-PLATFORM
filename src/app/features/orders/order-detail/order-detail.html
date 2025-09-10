@@ -1,0 +1,56 @@
+<!-- Path: src/app/features/orders/order-detail/order-detail.html -->
+<div class="order-detail-container">
+ @if (isLoading$ | async) {
+    <div class="loading-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+  } @else if (order$ | async; as order) {
+    <header class="page-header">
+      <h1>Order Details</h1>
+      <a mat-button routerLink="/orders"><mat-icon>arrow_back</mat-icon> Back to Order History</a>
+    </header>
+    <div class="order-detail-layout">
+        <mat-card class="order-items-card">
+            <mat-card-header>
+                <mat-card-title>Items in Order #{{order.id}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                @for(item of order.items; track item.product.id) {
+                    <div class="order-item">
+                        <img [src]="item.product.imageUrl" class="item-image">
+                        <div class="item-info">
+                            <span class="item-name">{{item.product.name}}</span>
+                            <span class="item-qty">Quantity: {{item.quantity}}</span>
+                        </div>
+                        <span class="item-price">{{ (item.product.b2bPrice * item.quantity) | currency:'USD' }}</span>
+                    </div>
+                }
+            </mat-card-content>
+        </mat-card>
+         <mat-card class="order-summary-card">
+            <mat-card-header>
+                <mat-card-title>Summary</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                 <div class="summary-line">
+                    <span>Status</span>
+                    <span>{{ order.status }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Shipping To</span>
+                    <span>{{ order.shippingAddress.fullName }}</span>
+                </div>
+                 <div class="summary-line">
+                    <span>Address</span>
+                    <span>{{ order.shippingAddress.address }}, {{ order.shippingAddress.city }}</span>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="summary-line total">
+                    <span>Total Paid</span>
+                    <span>{{ order.totalAmount | currency:'USD' }}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+  }
+</div>

@@ -1,0 +1,32 @@
+<!-- Path: src/app/features/orders/order-list/order-list.html -->
+<div class="order-list-container">
+  <header class="page-header">
+    <h1>Your <span class="gradient-text">Order History</span></h1>
+  </header>
+
+  @if (isLoading$ | async) {
+    <div class="loading-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+  } @else {
+    <div class="orders">
+      @for (order of (orders$ | async); track order.id) {
+        <mat-card class="order-card">
+          <mat-card-header>
+            <mat-card-title>Order #{{ order.id }}</mat-card-title>
+            <mat-card-subtitle>Placed on: {{ order.createdAt | date:'medium' }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Status:</strong> {{ order.status }}</p>
+            <p><strong>Total:</strong> {{ order.totalAmount | currency:'USD' }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-button [routerLink]="['/orders', order.id]">View Details</a>
+          </mat-card-actions>
+        </mat-card>
+      } @empty {
+        <p class="no-orders">You have not placed any orders yet.</p>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,61 @@
+<div class="registration-container">
+  <mat-card class="registration-card">
+    <mat-card-header>
+      <mat-card-title class="card-title">
+        Become a <span class="gradient-text">SEPA Partner</span>
+      </mat-card-title>
+      <mat-card-subtitle class="card-subtitle">
+        Fill out the form below to begin the approval process.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Company Name</mat-label>
+          <input matInput formControlName="companyName" placeholder="e.g., Acme Corp">
+          @if (registrationForm.get('companyName')?.hasError('required')) {
+            <mat-error>Company name is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>SIRET Number</mat-label>
+          <input matInput formControlName="siret" placeholder="14-digit SIRET number">
+           @if (registrationForm.get('siret')?.hasError('required')) {
+            <mat-error>SIRET number is required.</mat-error>
+          }
+           @if (registrationForm.get('siret')?.hasError('pattern')) {
+            <mat-error>Please enter a valid 14-digit SIRET number.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>VAT Number</mat-label>
+          <input matInput formControlName="vatNumber" placeholder="e.g., FRXX123456789">
+           @if (registrationForm.get('vatNumber')?.hasError('required')) {
+            <mat-error>VAT number is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <button type="button" mat-stroked-button (click)="fileInput.click()" class="upload-button">
+          <mat-icon>upload_file</mat-icon>
+          Upload Legal Documents
+        </button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+        <span class="file-name">{{ registrationForm.get('legalDocuments')?.value?.name || 'No file chosen' }}</span>
+         @if (registrationForm.get('legalDocuments')?.hasError('required') && registrationForm.get('legalDocuments')?.touched) {
+          <mat-error class="file-error">Legal documents are required.</mat-error>
+        }
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button
+              class="submit-button sepa-gradient-button"
+              [disabled]="registrationForm.invalid"
+              (click)="onSubmit()">
+        Submit for Approval
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

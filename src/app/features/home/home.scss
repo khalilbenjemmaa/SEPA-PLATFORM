@@ -1,0 +1,212 @@
+:host {
+  display: block;
+}
+
+/* --- HERO SECTION STYLES --- */
+.hero-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  padding: 100px 2rem 4rem 2rem;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('https://images.pexels.com/photos/7989505/pexels-photo-7989505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, var(--sepa-bg-primary) 5%, rgba(255, 255, 255, 0.75) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 950px;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 1.5rem 0;
+  color: var(--sepa-text-primary);
+}
+
+.gradient-text {
+  background: var(--sepa-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+  color: var(--sepa-text-secondary);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.secondary-action {
+  .mat-icon {
+    transition: transform 0.3s ease-in-out;
+  }
+  &:hover .mat-icon {
+    transform: translateX(4px);
+  }
+}
+
+/* --- STANDARD CONTENT SECTION STYLES --- */
+.content-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--sepa-bg-primary);
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--sepa-text-primary);
+  margin-bottom: 4rem;
+}
+
+/* FEATURES SECTION */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  text-align: left;
+}
+
+.feature-card {
+  background-color: var(--sepa-bg-primary);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--sepa-border-color);
+  box-shadow: var(--sepa-shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sepa-shadow-lg);
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    color: var(--sepa-text-primary);
+  }
+  p {
+    line-height: 1.6;
+    color: var(--sepa-text-secondary);
+  }
+}
+
+.feature-icon {
+  font-size: 3rem; width: 3rem; height: 3rem;
+  color: var(--sepa-primary);
+}
+
+/* --- REVAMPED 'HOW IT WORKS' SECTION --- */
+.how-it-works-section {
+  background-color: var(--sepa-bg-secondary);
+  border-top: 1px solid var(--sepa-border-color);
+  border-bottom: 1px solid var(--sepa-border-color);
+}
+
+// Replaced the old flexbox layout with a robust CSS Grid.
+.steps-grid {
+  display: grid;
+  // On mobile, stack the steps in a single column.
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
+
+  // On tablets and larger, switch to a 3-column layout.
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+// Elegant dashed line connector for desktop view.
+.steps-grid::before {
+  content: '';
+  display: none; // Hidden on mobile
+  position: absolute;
+  top: 25px; // Vertically centered with the step numbers
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background-image: linear-gradient(to right, var(--sepa-border-color) 66%, transparent 33%);
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+  z-index: 0;
+
+  @media (min-width: 768px) {
+    display: block; // Visible on desktop
+  }
+}
+
+
+.step {
+  display: flex;
+  // Changed direction to column for a cleaner vertical alignment of number and text.
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  position: relative; // For z-index to work
+  z-index: 1;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--sepa-gradient);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: var(--sepa-shadow-md);
+  // Added a border to make the number pop from the background.
+  border: 4px solid var(--sepa-bg-secondary);
+}
+
+.step-content {
+  h4 {
+    color: var(--sepa-text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  p {
+    color: var(--sepa-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+

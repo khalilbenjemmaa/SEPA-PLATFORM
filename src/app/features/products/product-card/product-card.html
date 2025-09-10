@@ -1,0 +1,26 @@
+<a [routerLink]="['/products', product.id]" class="product-card-link">
+  <mat-card class="product-card">
+    <div class="badge">
+      Save {{ savings | currency:'USD':'symbol':'1.2-2' }}
+    </div>
+    <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+    <mat-card-content>
+      <div class="category-chip">{{ product.category }}</div>
+      <h3 class="product-name">{{ product.name }}</h3>
+      <div class="price-container">
+        <span class="b2c-price">{{ product.b2cPrice | currency:'USD' }}</span>
+        <span class="b2b-price">{{ product.b2bPrice | currency:'USD' }}</span>
+      </div>
+      <p class="price-label">Your Exclusive Price</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- Updated button with click handler -->
+      <button mat-flat-button class="add-to-cart-btn sepa-gradient-button"
+              (click)="$event.stopPropagation(); $event.preventDefault(); onAddToCart(product)">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Add to Cart
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</a>
+
