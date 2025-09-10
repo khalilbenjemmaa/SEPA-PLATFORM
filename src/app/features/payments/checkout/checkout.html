@@ -1,0 +1,108 @@
+<!-- Path: src/app/features/payments/checkout/checkout.html -->
+<div class="checkout-container">
+  <header class="page-header">
+    <h1>Checkout</h1>
+  </header>
+
+  <div class="checkout-layout">
+    <!-- Left Side: Stepper for Forms -->
+    <div class="form-section">
+      <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <!-- Step 1: Shipping Address -->
+        <mat-step [stepControl]="shippingForm">
+          <ng-template matStepLabel>Shipping Information</ng-template>
+          <form [formGroup]="shippingForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="fullName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Street Address</mat-label>
+              <input matInput formControlName="address">
+            </mat-form-field>
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>ZIP Code</mat-label>
+                <input matInput formControlName="zipCode">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 2: Payment Details -->
+        <mat-step [stepControl]="paymentForm">
+          <ng-template matStepLabel>Payment Details</ng-template>
+          <form [formGroup]="paymentForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Cardholder Name</mat-label>
+              <input matInput formControlName="cardholderName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Card Number</mat-label>
+              <input matInput formControlName="cardNumber" placeholder="1111222233334444">
+            </mat-form-field>
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Expiry Date (MM/YY)</mat-label>
+                <input matInput formControlName="expiryDate" placeholder="12/25">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>CVC</mat-label>
+                <input matInput formControlName="cvc" placeholder="123">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 3: Confirm Order -->
+        <mat-step>
+          <ng-template matStepLabel>Confirm Order</ng-template>
+          <p>You're ready to place your order. Please review the details on the right.</p>
+          <div>
+             @if (isLoading$ | async) {
+              <div class="spinner-container">
+                <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+                <span>Processing your order...</span>
+              </div>
+            } @else {
+              <button mat-flat-button class="sepa-gradient-button" (click)="onConfirmOrder()">
+                Confirm & Pay
+              </button>
+            }
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+
+    <!-- Right Side: Order Summary -->
+    <mat-card class="order-summary">
+      <mat-card-header>
+        <mat-card-title>Order Summary</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @for(item of cartItems(); track item.product.id) {
+          <div class="summary-item">
+            <span class="item-name">{{item.product.name}} (x{{item.quantity}})</span>
+            <span class="item-price">{{ (item.product.b2bPrice * item.quantity) | currency:'USD' }}</span>
+          </div>
+        }
+        <mat-divider></mat-divider>
+        <div class="summary-line total">
+          <span>Total</span>
+          <span>{{ totalPrice() | currency:'USD' }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- Path: src/app/layout/header/header.html -->
+<mat-toolbar class="app-header">
+  <a routerLink="/" class="logo-container">
+    <mat-icon class="logo-icon">grain</mat-icon>
+    <span class="logo-text">SEPA</span>
+  </a>
+
+  <span class="toolbar-spacer"></span>
+
+  <div class="navigation-items">
+    <a mat-button routerLink="/products" routerLinkActive="active-link">Products</a>
+    <a mat-button routerLink="/about-us" routerLinkActive="active-link">About Us</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
+  </div>
+
+  <a mat-icon-button
+     routerLink="/cart"
+     aria-label="Shopping Cart"
+     class="cart-button"
+     [matBadge]="cartItemCount()"
+     [matBadgeHidden]="cartItemCount() === 0"
+     matBadgeColor="warn">
+    <mat-icon>shopping_cart</mat-icon>
+  </a>
+
+  <!-- Conditional Authentication Buttons -->
+  @if (isLoggedIn$ | async) {
+    <!-- User is Logged In: Show Profile Menu -->
+    <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-avatar-button">
+      <img src="assets/images/avatar.png" alt="User Avatar">
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>account_circle</mat-icon>
+        <span>My Profile</span>
+      </button>
+      <!-- NEW: Added a link to the order history page -->
+      <button mat-menu-item routerLink="/orders">
+        <mat-icon>receipt_long</mat-icon>
+        <span>My Orders</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sign Out</span>
+      </button>
+    </mat-menu>
+  } @else {
+    <!-- User is Logged Out: Show Sign In / Register -->
+    <a mat-stroked-button routerLink="/login" class="login-button">
+      <mat-icon>login</mat-icon>
+      Sign In
+    </a>
+    <a mat-flat-button routerLink="/register-company" class="register-button sepa-gradient-button">
+      Register Company
+    </a>
+  }
+</mat-toolbar>
+

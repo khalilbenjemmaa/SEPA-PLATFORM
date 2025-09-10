@@ -1,0 +1,17 @@
+<div class="product-list-container">
+  <header class="page-header">
+    <h1>Our <span class="gradient-text">Product Catalog</span></h1>
+    <p>Discover high-quality products at exclusive wholesale prices.</p>
+  </header>
+
+  @if (products$ | async; as products) {
+    <div class="product-grid">
+      @for (product of products; track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  } @else {
+    <!-- Add a loading spinner here for better UX in a real app -->
+    <p>Loading products...</p>
+  }
+</div>

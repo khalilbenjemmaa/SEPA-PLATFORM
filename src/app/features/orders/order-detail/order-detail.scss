@@ -1,0 +1,63 @@
+// Path: src/app/features/orders/order-detail/order-detail.scss
+:host {
+  display: block;
+  padding: 2rem;
+  background-color: #fafafa;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.order-detail-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-name {
+    font-weight: 500;
+}
+.item-qty {
+    color: var(--sepa-text-secondary);
+    font-size: 0.9rem;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  &.total {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+}

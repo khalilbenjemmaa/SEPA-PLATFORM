@@ -1,0 +1,67 @@
+@if (product$ | async; as product) {
+  <div class="product-detail-container">
+    <!-- Image Column (omitted for brevity) -->
+    <div class="image-panel">
+       <a routerLink="/products" class="back-link">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back to Catalog</span>
+      </a>
+      <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+    </div>
+
+    <!-- Details Column -->
+    <div class="details-panel">
+       <!-- ... other details (omitted for brevity) -->
+       <span class="category-chip">{{ product.category }}</span>
+      <h1 class="product-title">{{ product.name }}</h1>
+       <div class="price-section">
+        <div class="b2b-price-wrapper">
+          <span class="price-label">Your Price</span>
+          <span class="b2b-price">{{ product.b2bPrice | currency:'USD' }}</span>
+        </div>
+        <div class="b2c-price-wrapper">
+          <span class="regular-price">Regular: {{ product.b2cPrice | currency:'USD' }}</span>
+          <span class="savings-badge">You Save {{ getSavings(product) | currency:'USD' }}!</span>
+        </div>
+      </div>
+      <p class="product-description">{{ product.description }}</p>
+
+      <div class="actions-section">
+        <div class="quantity-selector">
+          <button mat-icon-button (click)="decrementQuantity()" aria-label="Decrease quantity">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span class="quantity-value">{{ quantity() }}</span>
+          <button mat-icon-button (click)="incrementQuantity()" aria-label="Increase quantity">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <!-- Updated button -->
+        <button mat-flat-button class="add-to-cart-btn sepa-gradient-button" (click)="onAddToCart(product)">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Add to Cart
+        </button>
+      </div>
+      <!-- ... stock info (omitted for brevity) -->
+        <div class="stock-info">
+        <mat-icon [ngClass]="{'in-stock': product.stockQuantity > 0, 'low-stock': product.stockQuantity <= 50}">check_circle</mat-icon>
+        <span>
+          @if(product.stockQuantity > 50) {
+            In Stock
+          } @else if (product.stockQuantity > 0) {
+            Low Stock ({{product.stockQuantity}} left)
+          } @else {
+            Out of Stock
+          }
+        </span>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="loading-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p>Loading Product Details...</p>
+  </div>
+}
+

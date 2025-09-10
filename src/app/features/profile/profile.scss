@@ -1,0 +1,100 @@
+// Path: src/app/features/profile/profile.scss
+
+:host {
+  display: block;
+  background-color: #fafafa;
+  min-height: calc(100vh - 70px); // Full height minus header
+}
+
+.profile-page-container {
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var(--sepa-text-secondary);
+    margin-top: 0.5rem;
+  }
+
+  .gradient-text {
+    background: var(--sepa-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.profile-content-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: var(--sepa-shadow-md);
+  padding: 1rem;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--sepa-text-primary);
+  margin: 1.5rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--sepa-border-color);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.section-divider {
+  margin: 2.5rem 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f9f9f9;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  margin: 0 -1rem -1rem -1rem; /* Adjust for card padding */
+
+  .actions-spacer {
+    flex: 1 1 auto;
+  }
+
+  .logout-button {
+    color: var(--mat-warn-500, #f44336);
+    border-color: var(--mat-warn-500, #f44336);
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+}

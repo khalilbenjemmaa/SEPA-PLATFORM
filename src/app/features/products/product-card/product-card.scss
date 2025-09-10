@@ -1,0 +1,102 @@
+:host {
+  display: block;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--sepa-border-color);
+  box-shadow: var(--sepa-shadow-sm);
+  background-color: var(--sepa-bg-primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sepa-shadow-md);
+    border-color: var(--sepa-primary);
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: var(--sepa-accent); // Use new accent color
+  color: var(--sepa-dark); // Better contrast
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  z-index: 2;
+}
+
+mat-card-image {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+mat-card-content {
+  padding: 1.5rem;
+}
+
+.category-chip {
+  display: inline-block;
+  background-color: var(--sepa-bg-secondary);
+  color: var(--sepa-primary);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+  min-height: 55px;
+  color: var(--sepa-text-primary);
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+
+  .b2c-price {
+    font-size: 1rem;
+    color: var(--sepa-text-secondary);
+    text-decoration: line-through;
+  }
+
+  .b2b-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--sepa-primary);
+  }
+}
+
+.price-label {
+  font-size: 0.8rem;
+  color: var(--sepa-text-secondary);
+  margin: 0;
+}
+
+mat-card-actions {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+}
+

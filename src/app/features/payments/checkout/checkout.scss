@@ -1,0 +1,68 @@
+// Path: src/app/features/payments/checkout/checkout.scss
+
+:host {
+  display: block;
+  background-color: #fafafa;
+  padding: 2rem;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.form-section {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--sepa-soft-shadow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.order-summary {
+  position: sticky;
+  top: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--sepa-soft-shadow);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.summary-line.total {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  color: var(--sepa-text-secondary);
+}

@@ -1,0 +1,82 @@
+<!-- Path: src/app/features/profile/profile.html -->
+<div class="profile-page-container">
+  <header class="page-header">
+    <h1>Manage Your <span class="gradient-text">Profile</span></h1>
+    <p>Update your personal details and delivery preferences.</p>
+  </header>
+
+  @if (user$ | async; as user) {
+    <div class="profile-content-container">
+      <mat-card class="profile-card">
+        <mat-card-content>
+          <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
+            <!-- Personal Information Section -->
+            <div formGroupName="profileData">
+              <h3 class="form-section-title">Personal Information</h3>
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="firstName">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="lastName">
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput [value]="user.email" readonly disabled>
+                  <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phone" placeholder="e.g., +33 1 23 45 67 89">
+                </mat-form-field>
+              </div>
+
+              <mat-divider class="section-divider"></mat-divider>
+
+              <!-- Delivery Address Section -->
+              <div formGroupName="deliveryAddress">
+                <h3 class="form-section-title">Delivery Address</h3>
+                <mat-form-field appearance="outline">
+                  <mat-label>Street</mat-label>
+                  <input matInput formControlName="street">
+                </mat-form-field>
+
+                <div class="form-row">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput formControlName="zipCode">
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Country</mat-label>
+                  <input matInput formControlName="country">
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-stroked-button class="logout-button" (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            Sign Out
+          </button>
+          <span class="actions-spacer"></span>
+          <button mat-flat-button class="submit-button sepa-gradient-button" [disabled]="profileForm.invalid" (click)="onUpdateProfile()">
+            Save Changes
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  }
+</div>
+

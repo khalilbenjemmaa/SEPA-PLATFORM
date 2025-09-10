@@ -1,0 +1,75 @@
+<!-- Path: src/app/features/cart/cart.html -->
+<div class="cart-container">
+  <header class="page-header">
+    <h1>Your <span class="gradient-text">Shopping Cart</span></h1>
+  </header>
+
+  @if (cartItems().length > 0) {
+    <div class="cart-layout">
+      <!-- Cart Items Section -->
+      <div class="cart-items-list">
+        @for (item of cartItems(); track item.product.id) {
+          <div class="cart-item">
+            <img [src]="item.product.imageUrl" [alt]="item.product.name" class="item-image">
+            <div class="item-details">
+              <h3 class="item-name">{{ item.product.name }}</h3>
+              <p class="item-price">{{ item.product.b2bPrice | currency:'USD' }}</p>
+            </div>
+            <div class="item-actions">
+              <div class="quantity-selector">
+                <button mat-icon-button (click)="updateQuantity(item.product.id, item.quantity - 1)" aria-label="Decrease quantity">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="quantity-value">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="updateQuantity(item.product.id, item.quantity + 1)" aria-label="Increase quantity">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <p class="item-total-price">{{ (item.product.b2bPrice * item.quantity) | currency:'USD' }}</p>
+            </div>
+            <button mat-icon-button (click)="removeFromCart(item.product.id)" class="remove-button" aria-label="Remove item">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Order Summary Section -->
+      <mat-card class="order-summary">
+        <mat-card-header>
+          <mat-card-title>Order Summary</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <span>{{ totalPrice() | currency:'USD' }}</span>
+          </div>
+          <div class="summary-line">
+            <span>Shipping</span>
+            <span>FREE</span>
+          </div>
+          <hr>
+          <div class="summary-line total">
+            <span>Total</span>
+            <span>{{ totalPrice() | currency:'USD' }}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- FIX: Changed <button> to an <a> tag with a routerLink to navigate to the checkout page -->
+          <a mat-flat-button class="checkout-btn sepa-gradient-button" routerLink="/checkout">
+            Proceed to Checkout
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  } @else {
+    <div class="empty-cart-container">
+      <mat-icon class="empty-cart-icon">production_quantity_limits</mat-icon>
+      <h2>Your Cart is Empty</h2>
+      <p>Looks like you haven't added any products yet. Explore our catalog to find what you need!</p>
+      <a mat-flat-button class="sepa-gradient-button" routerLink="/products">
+        Start Shopping
+      </a>
+    </div>
+  }
+</div>
